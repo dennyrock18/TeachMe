@@ -22,7 +22,7 @@ class TicketTableSeeder extends BaseSeeder
 
             'title'      => $faker->sentence(),
             'status'     => $faker->randomElement(['open','open','closed']),
-            'user_id'    => rand(1,51)
+            'user_id'    => $this->getRandom('User')->id
 
         ];
     }
