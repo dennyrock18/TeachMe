@@ -1,31 +1,28 @@
 <?php
 
 use TeachMe\Entities\User;
-use Faker\Factory as Faker;
 use Faker\Generator;
 
 /**
  * Created by PhpStorm.
  * User: Denny
  * Date: 06/08/2015
- * Time: 23:25
+ * Time: 23:25.
  */
-
 class UserTableSeeder extends BaseSeeder
 {
-
     public function getModel()
     {
         return new User();
     }
 
-    public function getDummyData(Generator $faker,array $customValues = array())
+    public function getDummyData(Generator $faker, array $customValues = array())
     {
         return [
 
-            'name'      => $faker->name,
-            'email'     => $faker->email,
-            'password'  => bcrypt('admin')
+            'name' => $faker->name,
+            'email' => $faker->email,
+            'password' => bcrypt('admin'),
 
         ];
     }
@@ -43,12 +40,10 @@ class UserTableSeeder extends BaseSeeder
     {
         $this->create([
 
-            'name'      => 'Denny Lopez',
-            'email'     => 'dennyrock18@gmail.com',
-            'password'  => bcrypt('admin')
+            'name' => 'Denny Lopez',
+            'email' => 'dennyrock18@gmail.com',
+            'password' => bcrypt('admin'),
 
         ]);
-
     }
-
 }

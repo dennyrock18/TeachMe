@@ -1,4 +1,5 @@
 <?php
+
 use TeachMe\Entities\TiketsComments;
 use Faker\Generator;
 
@@ -6,7 +7,7 @@ use Faker\Generator;
  * Created by PhpStorm.
  * User: Denny
  * Date: 07/08/2015
- * Time: 14:37
+ * Time: 14:37.
  */
 class TicketCommentTableSeeder extends BaseSeeder
 {
@@ -21,10 +22,10 @@ class TicketCommentTableSeeder extends BaseSeeder
     {
         return [
 
-            'comment'    => $faker->paragraph(rand(2,6)),
-            'link'       => $faker->randomElement(['','',$faker->url]),
-            'user_id'    => $this->getRandom('User')->id,
-            'ticket_id'  => $this->getRandom('Ticket')->id
+            'comment' => $faker->paragraph(rand(2, 6)),
+            'link' => $faker->randomElement(['', '', $faker->url]),
+            'user_id' => $this->getRandom('User')->id,
+            'ticket_id' => $this->getRandom('Ticket')->id,
 
         ];
     }
@@ -37,8 +38,4 @@ class TicketCommentTableSeeder extends BaseSeeder
     {
         $this->createMultiple(50);
     }*/
-
-
-
 }
-

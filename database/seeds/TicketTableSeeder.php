@@ -1,4 +1,5 @@
 <?php
+
 use TeachMe\Entities\Ticket;
 use Faker\Generator;
 
@@ -6,11 +7,10 @@ use Faker\Generator;
  * Created by PhpStorm.
  * User: Denny
  * Date: 07/08/2015
- * Time: 14:37
+ * Time: 14:37.
  */
 class TicketTableSeeder extends BaseSeeder
 {
-
     public function getModel()
     {
         return new Ticket();
@@ -20,9 +20,9 @@ class TicketTableSeeder extends BaseSeeder
     {
         return [
 
-            'title'      => $faker->sentence(),
-            'status'     => $faker->randomElement(['open','open','closed']),
-            'user_id'    => $this->getRandom('User')->id
+            'title' => $faker->sentence(),
+            'status' => $faker->randomElement(['open', 'open', 'closed']),
+            'user_id' => $this->getRandom('User')->id,
 
         ];
     }
@@ -35,7 +35,4 @@ class TicketTableSeeder extends BaseSeeder
     {
         $this->createMultiple(50);
     }*/
-
-
 }
-
