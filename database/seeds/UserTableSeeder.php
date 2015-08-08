@@ -30,6 +30,8 @@ class UserTableSeeder extends BaseSeeder
         ];
     }
 
+    //Aqui se dejo el metodo porque en este caso
+    //Se esta creando un administrador del sistema
     public function run()
     {
         $this->createAdmin();

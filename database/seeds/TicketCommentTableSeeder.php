@@ -1,5 +1,5 @@
 <?php
-use TeachMe\Entities\Ticket;
+use TeachMe\Entities\TiketsComments;
 use Faker\Generator;
 
 /**
@@ -8,21 +8,23 @@ use Faker\Generator;
  * Date: 07/08/2015
  * Time: 14:37
  */
-class TicketTableSeeder extends BaseSeeder
+class TicketCommentTableSeeder extends BaseSeeder
 {
+    protected $total = 250;
 
     public function getModel()
     {
-        return new Ticket();
+        return new TiketsComments();
     }
 
     public function getDummyData(Generator $faker, array $customValues = array())
     {
         return [
 
-            'title'      => $faker->sentence(),
-            'status'     => $faker->randomElement(['open','open','closed']),
-            'user_id'    => $this->getRandom('User')->id
+            'comment'    => $faker->paragraph(rand(2,6)),
+            'link'       => $faker->randomElement(['','',$faker->url]),
+            'user_id'    => $this->getRandom('User')->id,
+            'ticket_id'  => $this->getRandom('Ticket')->id
 
         ];
     }
@@ -35,6 +37,7 @@ class TicketTableSeeder extends BaseSeeder
     {
         $this->createMultiple(50);
     }*/
+
 
 
 }

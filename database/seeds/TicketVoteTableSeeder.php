@@ -1,5 +1,5 @@
 <?php
-use TeachMe\Entities\Ticket;
+use TeachMe\Entities\TicketVote;
 use Faker\Generator;
 
 /**
@@ -8,24 +8,24 @@ use Faker\Generator;
  * Date: 07/08/2015
  * Time: 14:37
  */
-class TicketTableSeeder extends BaseSeeder
+class TicketVoteTableSeeder extends BaseSeeder
 {
+
+    protected $total = 250;
 
     public function getModel()
     {
-        return new Ticket();
+        return new TicketVote();
     }
 
     public function getDummyData(Generator $faker, array $customValues = array())
     {
         return [
-
-            'title'      => $faker->sentence(),
-            'status'     => $faker->randomElement(['open','open','closed']),
-            'user_id'    => $this->getRandom('User')->id
-
+            'user_id'    => $this->getRandom('User')->id,
+            'ticket_id'  => $this->getRandom('Ticket')->id
         ];
     }
+
 
     //No hace falta al no ser que se quieram
     // generar mas de 50 ya que este
@@ -35,6 +35,7 @@ class TicketTableSeeder extends BaseSeeder
     {
         $this->createMultiple(50);
     }*/
+
 
 
 }
