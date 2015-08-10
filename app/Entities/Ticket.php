@@ -19,4 +19,10 @@ class Ticket extends Model
      * @var array
      */
    //protected $fillable = ['title', 'status'];
+
+    public function getOpenAttribute()
+    {
+
+        return $this->status == 'open';
+    }
 }

@@ -1,5 +1,6 @@
 <?php namespace TeachMe\Http\Controllers;
 
+use TeachMe\Entities\Ticket;
 use TeachMe\Http\Requests;
 use TeachMe\Http\Controllers\Controller;
 
@@ -9,7 +10,11 @@ class TicketsController extends Controller {
 
 	public function latest()
     {
-        return view('tickests.list');
+        $tickets = Ticket::orderBy('created_at','DESC')->paginate(8);
+
+        //dd($tickets);
+
+        return view('tickests.list',compact('tickets'));
     }
 
     public function popular()
@@ -29,7 +34,13 @@ class TicketsController extends Controller {
 
     public function details($id)
     {
-        return view('tickests.details');
+        //Este metodo findOrFail a diferencia del Find es que retorna en caso de no
+        //Encontarce ninguno en la BD un error 404
+        $ticket = Ticket::findOrFail($id);
+
+        //dd($tickets);
+
+        return view('tickests.details', compact('ticket'));
     }
 
 }
