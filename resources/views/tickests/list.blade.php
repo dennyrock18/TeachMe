@@ -8,7 +8,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="row">
                 <h1>
-                    Solicitudes Populares
+                    {{  trans(Route::currentRouteName() . '_title') }}
                     <a href="#" class="btn btn-primary">
                         Nueva solicitud</a>
                 </h1>
@@ -20,7 +20,7 @@
                 @endforeach
 
                 {!! $tickets->render() !!}
-                
+
             </div>
 
             <hr>

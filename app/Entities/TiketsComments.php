@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class TiketsComments extends Model
 {
     //
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

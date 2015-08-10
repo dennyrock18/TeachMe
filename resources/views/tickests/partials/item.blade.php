@@ -15,8 +15,9 @@
         </a>--}}
 
         <a href="{{ route('tickets.details', $ticket) }}">
-            <span class="votes-count">12 votos</span>
-            - <span class="comments-count">0 comentarios</span>.
+            <span class="votes-count">{{ count($ticket->voters) }} votos</span>
+            {{--De esta manera en la que traigo todos los comenrarios es igual que la de todos los votes pero es otra forma--}}
+            - <span class="comments-count">{{ $ticket->comments()->count() }} comentarios</span>.
         </a>
 
 

@@ -6,19 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    /*
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    //protected $table = 'tickets';
 
-    /*
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-   //protected $fillable = ['title', 'status'];
+
+    public function autor()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(TiketsComments::class);
+    }
+
+    //Relacion Tiene y pertenece a muuchos
+
+    public function voters()
+    {
+        return $this->belongsToMany(User::class,'ticket_votes');
+    }
 
     public function getOpenAttribute()
     {

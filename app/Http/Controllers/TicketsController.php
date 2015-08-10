@@ -12,8 +12,6 @@ class TicketsController extends Controller {
     {
         $tickets = Ticket::orderBy('created_at','DESC')->paginate(8);
 
-        //dd($tickets);
-
         return view('tickests.list',compact('tickets'));
     }
 
@@ -24,12 +22,16 @@ class TicketsController extends Controller {
 
     public function open()
     {
-        return view('tickests.list');
+        $tickets = Ticket::where('status','open')->paginate(8);
+
+        return view('tickests.list',compact('tickets'));
     }
 
     public function closed()
     {
-        return view('tickests.list');
+        $tickets = Ticket::where('status','closed')->paginate(8);
+
+        return view('tickests.list',compact('tickets'));
     }
 
     public function details($id)
