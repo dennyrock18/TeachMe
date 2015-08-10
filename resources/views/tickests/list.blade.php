@@ -13,7 +13,7 @@
                         Nueva solicitud</a>
                 </h1>
 
-                <p class="label label-info news">Hay {!! $tickets->total() !!} Solicitudes Populares</p>
+                <p class="label label-info news">{{  Lang::choice(Route::currentRouteName() . '_total', $tickets->total()) }}</p>
 
                 @foreach($tickets as $ticket)
                 @include('tickests.partials.item', compact('ticket'))
