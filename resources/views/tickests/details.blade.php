@@ -11,8 +11,8 @@
 
             </h2>
             <p class="date-t">
-                <span class="glyphicon glyphicon-time"></span>{{ $ticket->created_at->format('d/m/y h:ia') }}</p>
-            </p>
+                <span class="glyphicon glyphicon-time"></span>{{ $ticket->created_at->format('d/m/y h:ia') }}
+            - {{ $ticket->user->name }}</p>
             <h4 class="label label-info news">{{ count ($ticket->voters) }} </h4>
 
             <p class="vote-users">
@@ -38,7 +38,7 @@
             <h3>Nuevo Comentario</h3>
 
 
-            <form method="POST" action="http://teachme.dev/comentar/5" accept-charset="UTF-8"><input name="_token" type="hidden" value="VBIv3EWDAIQuLRW0cGwNQ4OsDKoRhnK2fAEF6UbQ">
+            {!! Form::open(['route' => ['comments.submit', $ticket->id], 'method' => 'POST']) !!}
                 <div class="form-group">
                     <label for="comment">Comentarios:</label>
                     <textarea rows="4" class="form-control" name="comment" cols="50" id="comment"></textarea>
@@ -48,7 +48,7 @@
                     <input class="form-control" name="link" type="text" id="link">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar comentario</button>
-            </form>
+            {!! Form::close() !!}
 
             <h3>Comentarios ({{ count($ticket->comments) }})</h3>
 

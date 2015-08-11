@@ -35,9 +35,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
 
-    public function comments()
+    public function tickets()
     {
-        return $this->hasMany(TiketsComments::class);
+        return $this->hasMany(Ticket::class);
     }
 
 
