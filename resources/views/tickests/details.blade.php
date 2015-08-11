@@ -21,19 +21,19 @@
                 <span class="label label-info">{{ $user->name }}</span>
                 @endforeach
             </p>
-
+                @if(! auth()->user()->hasVoted($ticket))
                 {!! Form::open(['route' => ['vote.submit', $ticket->id], 'method' => 'POST']) !!}
                     <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Votar
                     </button>
                 {!! Form::close()!!}
-
+                @else
                 {!! Form::open(['route' => ['vote.destroy', $ticket->id], 'method' => 'DELETE']) !!}
                 <button type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-thumbs-up"></span> Quitar Voto
+                    <span class="glyphicon glyphicon-thumbs-down"></span> Quitar Voto
                 </button>
                 {!! Form::close()!!}
-
+                @endif
 
             <h3>Nuevo Comentario</h3>
 

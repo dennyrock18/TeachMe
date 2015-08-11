@@ -14,7 +14,9 @@ class VotesController extends Controller {
 	{
 		$ticket = Ticket::find($id);
 
-		dd('Votar por el ticket con el id: '. $id .' de nombre:'. $ticket->title);
+		auth()->user()->vote($ticket);
+
+		return redirect()->back();
 	}
 
 
@@ -22,7 +24,9 @@ class VotesController extends Controller {
 	{
 		$ticket = Ticket::find($id);
 
-		dd('Eliminar el Votp de ticket con el id: '. $id .' de nombre:'. $ticket->title);
+		auth()->user()->unvote($ticket);
+
+		return redirect()->back();
 	}
 
 }
