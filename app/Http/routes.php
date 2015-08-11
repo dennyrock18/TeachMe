@@ -50,12 +50,32 @@ Route::get('/solicitud/{id}', [
 
 Route::group(['middleware' => 'auth'], function(){
 
-Route::get('/solicitar', [
+//Crear Solicitudes
+    Route::get('/solicitar', [
 
-    'as'   => 'tickets.create',
-    'uses' => 'TicketsController@create'
+        'as'   => 'tickets.create',
+        'uses' => 'TicketsController@create'
 
-]);
+    ]);
+    Route::post('/solicitar', [
+
+         'as'   => 'tickets.store',
+         'uses' => 'TicketsController@store'
+
+    ]);
+//Votar
+    Route::post('/votar/{id}', [
+
+        'as'   => 'vote.submit',
+        'uses' => 'VotesController@submit'
+
+    ]);
+    Route::delete('/votar/{id}', [
+
+        'as'   => 'vote.destroy',
+        'uses' => 'VotesController@destroy'
+
+    ]);
 
 });
 

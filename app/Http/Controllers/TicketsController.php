@@ -47,7 +47,14 @@ class TicketsController extends Controller {
 
     public function create()
     {
-        return 'Formulario de Solicitud';
+        return view('tickests.create');
+    }
+
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        //$user = User::create($request->all());
+        return view('tickests.create');
     }
 
 }

@@ -22,12 +22,18 @@
                 @endforeach
             </p>
 
-            <form method="POST" action="http://teachme.dev/votar/5" accept-charset="UTF-8"><input name="_token" type="hidden" value="VBIv3EWDAIQuLRW0cGwNQ4OsDKoRhnK2fAEF6UbQ">
-                <!--button type="submit" class="btn btn-primary">Votar</button-->
+                {!! Form::open(['route' => ['vote.submit', $ticket->id], 'method' => 'POST']) !!}
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> Votar
+                    </button>
+                {!! Form::close()!!}
+
+                {!! Form::open(['route' => ['vote.destroy', $ticket->id], 'method' => 'DELETE']) !!}
                 <button type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-thumbs-up"></span> Votar
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Quitar Voto
                 </button>
-            </form>
+                {!! Form::close()!!}
+
 
             <h3>Nuevo Comentario</h3>
 
