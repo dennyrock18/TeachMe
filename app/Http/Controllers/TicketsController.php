@@ -45,4 +45,9 @@ class TicketsController extends Controller {
         return view('tickests.details', compact('ticket'));
     }
 
+    public function create()
+    {
+        return 'Formulario de Solicitud';
+    }
+
 }
