@@ -5,11 +5,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h2 class="title-show">
-                {{ $ticket -> title }}
+            <h2 class="title-show">{{ $ticket -> title }}</h2>
+                @include('partials.error')
+                @if(Session::has('sucess'))
+                    <div class="alert alert-success">
+                        {{ Session::get('sucess')}}
+                    </div>
+                @endif
                 @include('tickests.partials.status', compact('ticket'))
 
-            </h2>
+
             <p class="date-t">
                 <span class="glyphicon glyphicon-time"></span>{{ $ticket->created_at->format('d/m/y h:ia') }}
             - {{ $ticket->user->name }}</p>
@@ -39,14 +44,14 @@
 
 
             {!! Form::open(['route' => ['comments.submit', $ticket->id], 'method' => 'POST']) !!}
-                <div class="form-group">
-                    <label for="comment">Comentarios:</label>
-                    <textarea rows="4" class="form-control" name="comment" cols="50" id="comment"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="link">Enlace:</label>
-                    <input class="form-control" name="link" type="text" id="link">
-                </div>
+            <div class="form-group">
+                {!! Form::label('comment', 'Comentario:') !!}
+                {!! Form::textarea('comment',null,['rows'=> 4,'class'=> 'form-control','placeholder' => 'Escribe su comentario'])!!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('link', 'Enlace:') !!}
+                {!! Form::text('link',null,['class'=> 'form-control', 'placeholder' => 'Si decea, introduce un enlace']) !!}
+            </div>
                 <button type="submit" class="btn btn-primary">Enviar comentario</button>
             {!! Form::close() !!}
 
@@ -56,6 +61,7 @@
             <div class="well well-sm">
                 <p><strong>{{$comment -> user -> name }}</strong></p>
                 <p>{{$comment -> comment }} </p>
+                <p><a href="{{$comment -> link }}" rel="nofollow" target="_blank"> {{$comment -> link }} </a></p>
                 <p class="date-t"><span class="glyphicon glyphicon-time"></span> {{ $comment->created_at->format('d/m/Y h:ia' ) }}</p>
             </div>
             @endforeach
