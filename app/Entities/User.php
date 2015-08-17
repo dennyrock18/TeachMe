@@ -54,8 +54,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function vote(Ticket $ticket)
     {
-        if ($this->hasVoted($ticket))
-            return false;
+        if ($this->hasVoted($ticket)) return false;
 
         $this->voters()->attach($ticket);
         return true;

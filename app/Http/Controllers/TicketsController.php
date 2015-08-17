@@ -10,9 +10,21 @@ use Illuminate\Http\Request;
 
 class TicketsController extends Controller {
 
+    protected function selectTicketsList()
+    {
+        return Ticket::selectRaw(
+            'tickets.*, '
+            . '( SELECT COUNT(*) FROM tikets_comments WHERE tikets_comments.ticket_id = tickets.id ) as num_comments,'
+            . '( SELECT COUNT(*) FROM ticket_votes WHERE ticket_votes.ticket_id = tickets.id ) as num_votes'
+        )->with('user');
+    }
+
 	public function latest()
     {
-        $tickets = Ticket::orderBy('created_at','DESC')->paginate(8);
+        $tickets = $this->selectTicketsList()
+            ->orderBy('created_at','DESC')
+            ->with('user')
+            ->paginate(10);
 
         return view('tickests.list',compact('tickets'));
     }
@@ -24,14 +36,20 @@ class TicketsController extends Controller {
 
     public function open()
     {
-        $tickets = Ticket::where('status','open')->paginate(8);
+        $tickets = $this->selectTicketsList()
+            ->where('status','open')
+            ->orderBy('created_at','DESC')
+            ->paginate(10);
 
         return view('tickests.list',compact('tickets'));
     }
 
     public function closed()
     {
-        $tickets = Ticket::where('status','closed')->paginate(8);
+        $tickets = $this->selectTicketsList()
+            ->where('status','closed')
+            ->orderBy('created_at','DESC')
+            ->paginate(10);
 
         return view('tickests.list',compact('tickets'));
     }
