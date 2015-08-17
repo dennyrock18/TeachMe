@@ -27,7 +27,7 @@
                     @endforeach
                 </p>
 
-                @if( auth()->guest())
+                @if(! Auth::check())
                     Para botar por este Tickets, debe estar <a href="{{ url('/auth/login') }}">Logeado</a>
                 @else
                     @if(! auth()->user()->hasVoted($ticket))
