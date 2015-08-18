@@ -66,16 +66,13 @@ class TicketsController extends Controller {
         return view('tickests.create');
     }
 
-    public function store(Request $request, Guard $auth)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'title' => 'required|max:120'
         ]);
 
-        $tickets = $auth->user()->tickets()->create([
-            'title'  => $request->get('title'),
-            'status' => 'open'
-        ]);
+        $tickets = $this->ticketRepository->openNew(auth()->user(), $request->get('title'));
 
         return redirect()->route('tickets.details', $tickets->id);
 

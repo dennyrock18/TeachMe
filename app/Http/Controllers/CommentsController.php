@@ -1,31 +1,58 @@
 <?php namespace TeachMe\Http\Controllers;
 
+use Illuminate\Auth\Guard;
+use Illuminate\Http\Request;
 use TeachMe\Entities\Ticket;
 use TeachMe\Entities\TiketsComments;
 use TeachMe\Http\Requests;
-use TeachMe\Http\Controllers\Controller;
+use TeachMe\Repositories\CommentRepository;
+use TeachMe\Repositories\TicketRepository;
 
-use Illuminate\Http\Request;
+class CommentsController extends Controller
+{
+    /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+    /**
+     * @var TicketRepository
+     */
+    private $ticketRepository;
 
-class CommentsController extends Controller {
 
+    /**
+     * @param CommentRepository $commentRepository
+     * @param TicketRepository $ticketRepository
+     */
+    public function __construct(CommentRepository $commentRepository, TicketRepository $ticketRepository)
+    {
+
+        $this->commentRepository = $commentRepository;
+        $this->ticketRepository = $ticketRepository;
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @param Guard $auth
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submit($id, Request $request)
     {
-        //dd($ticket->id());
+        //dd(auth()->user());
 
         $this->validate($request, [
-          'comment' => 'required|max:250',
-            'link'  => 'url'
+            'comment' => 'required|max:250',
+            'link' => 'url'
         ]);
 
-        $comment = new TiketsComments($request->all());
-        $comment->user_id = auth()->user()->id;
+        $ticket = $this->ticketRepository->findOrFail($id);
 
-        $ticket = Ticket::find($id);
-        $ticket->comments()->save($comment);
+        $this->commentRepository->create(auth()->user(), $ticket, $request->get('comment'), $request->get('link'));
+
 
         //Mensaje de confirmacion
-        session()->flash('sucess','Tu comentario fue guardado exitosamente');
+        session()->flash('sucess', 'Tu comentario fue guardado exitosamente');
 
         return redirect()->back();
     }

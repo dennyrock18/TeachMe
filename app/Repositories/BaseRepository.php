@@ -13,6 +13,7 @@ abstract class BaseRepository {
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
+
     public function newQuery()
     {
         return $this->getModel()->newQuery();

@@ -52,18 +52,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         //return TicketVote::where(['user_id' => $this->id, 'ticket_id' => $ticket->id])->count();
     }
 
-    public function vote(Ticket $ticket)
+    /*public function vote(Ticket $ticket)
     {
         if ($this->hasVoted($ticket)) return false;
-
         $this->voters()->attach($ticket);
         return true;
     }
-
     public function unvote(Ticket $ticket)
     {
         $this->voters()->detach($ticket);
+    }*/
 
-    }
+
 
 }
