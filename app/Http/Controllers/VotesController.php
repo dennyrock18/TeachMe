@@ -41,10 +41,14 @@ class VotesController extends Controller {
 		return redirect()->back();
 	}
 
-	public function destroy($id)
+	public function destroy($id, Request $request)
 	{
 		$ticket = $this->ticketRepository->findOrFail($id);
-		$this->votesRepository->unvote(auth()->user(), $ticket);
+		$success = $this->votesRepository->unvote(auth()->user(), $ticket);
+
+		if ($request->ajax()) {
+			return response()->json(compact('success'));
+		}
 
 		return redirect()->back();
 	}
