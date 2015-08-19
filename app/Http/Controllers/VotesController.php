@@ -25,12 +25,18 @@ class VotesController extends Controller {
 	{
 		$this->ticketRepository = $ticketRepository;
 		$this->votesRepository = $votesRepository;
+
 	}
 
-	public function submit($id)
+	public function submit($id, Request $request)
 	{
 		$ticket = $this->ticketRepository->findOrFail($id);
-		$this->votesRepository->vote(auth()->user(), $ticket);
+		$success=$this->votesRepository->vote(auth()->user(), $ticket);
+
+		if($request->ajax())
+		{
+			return response()->json(compact('success'));
+		}
 
 		return redirect()->back();
 	}

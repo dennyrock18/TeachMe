@@ -27,9 +27,7 @@
                     @endforeach
                 </p>
 
-                @if(! Auth::check())
-                    Para botar por este Tickets, debe estar <a href="{{ url('/auth/login') }}">Logeado</a>
-                @else
+                @if( Auth::check())
                     @if(! auth()->user()->hasVoted($ticket))
                         {!! Form::open(['route' => ['vote.submit', $ticket->id], 'method' => 'POST']) !!}
                         <button type="submit" class="btn btn-primary">
